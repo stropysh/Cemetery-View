@@ -3,11 +3,13 @@ unit DB_Test;
 interface
 
 uses
-  SysUtils, Classes, DB, IBDatabase;
+  SysUtils, Classes, DB, IBDatabase, IBCustomDataSet, IBQuery;
 
 type
   TDataModule1 = class(TDataModule)
     Base: TIBDatabase;
+    Query: TIBQuery;
+    Transact: TIBTransaction;
   private
     { Private declarations }
   public
