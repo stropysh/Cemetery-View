@@ -49,9 +49,14 @@
 			<DelphiCompile Include="Test_Project.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="Test1.pas">
+			<DCCReference Include="Test_Form.pas">
 				<Form>Form1</Form>
 			</DCCReference>
+			<DCCReference Include="DB_Test.pas">
+				<Form>DataModule1</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="..\UDB Universal\DB_Universal_IB.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
