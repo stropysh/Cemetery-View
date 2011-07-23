@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls;
+  Dialogs, StdCtrls, DB_Universal_IB, DB_Test, Operation_DB;
 
 type
   TForm1 = class(TForm)
@@ -24,8 +24,6 @@ var
 
 implementation
 
-uses DB_Universal_IB, DB_Test, Operation_DB;
-
 {$R *.dfm}
 
 //Коннект
@@ -36,15 +34,33 @@ begin
     showmessage('Коннект работает');
 end;
 
-//Чтение из БД
+//Чтение из БД описания захоронения
 procedure TForm1.Button2Click(Sender: TObject);
 var
-  i: integer;
+  Solution: PSolution_Burial;
 begin
-  Operation_DB.Read(DataModule1.Query, DataModule1.Transact ,'1');
+  //Запись в структуру
+  Operation_DB.Read_Solution(DataModule1.Query, DataModule1.Transact ,'1',2);
   Memo1.Clear;
-  for i:=0 to 14 do
-    Memo1.Lines.Add(DataModule1.Query.Fields[i].Value);
+  Solution:=FMyList.Items[0];
+  with Memo1.Lines do
+  begin
+    Add(inttostr(Solution.number_grave));
+    Add(inttostr(Solution.length));
+    Add(inttostr(Solution.width));
+    Add(inttostr(Solution.birth_year));
+    Add(inttostr(Solution.birth_months));
+    Add(inttostr(Solution.birth_day));
+    Add(inttostr(Solution.death_year));
+    Add(inttostr(Solution.death_months));
+    Add(inttostr(Solution.death_day));
+    Add(Solution.name);
+    Add(Solution.sername);
+    Add(Solution.thirdname);
+    Add(Solution.fence);
+  end;
+  //Очищаем динамическую память
+  Clear_All;
 end;
 
 end.
