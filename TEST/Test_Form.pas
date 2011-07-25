@@ -11,8 +11,10 @@ type
     Button1: TButton;
     Button2: TButton;
     Memo1: TMemo;
+    Button3: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,9 +24,17 @@ type
 var
   Form1: TForm1;
 
+  procedure test1;
+
 implementation
 
 {$R *.dfm}
+
+//Тест1
+procedure test1;
+begin
+  showmessage('Пашет!');
+end;
 
 //Коннект
 procedure TForm1.Button1Click(Sender: TObject);
@@ -40,9 +50,9 @@ var
   Solution: PSolution_Burial;
 begin
   //Запись в структуру
-  Operation_DB.Read_Solution(DataModule1.Query, DataModule1.Transact ,'1',2);
+  Read_Solution(DataModule1.Query, DataModule1.Transact ,'1',2);
   Memo1.Clear;
-  Solution:=FMyList.Items[0];
+  Solution:=FList.Items[0];
   with Memo1.Lines do
   begin
     Add(inttostr(Solution.number_grave));
@@ -60,7 +70,28 @@ begin
     Add(Solution.fence);
   end;
   //Очищаем динамическую память
-  Clear_All;
+  Clear_All(1);
+end;
+
+//Чтение из БД координат
+procedure TForm1.Button3Click(Sender: TObject);
+var
+  Coordinates: PCoordinates_Number;
+  i: integer;
+begin
+  //Запись в структуру
+  Read_Coordinates_Text(DataModule1.Query, DataModule1.Transact ,'1');
+  Memo1.Clear;
+  for i:=0 to High(FCoordinates) do
+  begin
+    Coordinates^:=FCoordinates[i];
+    with Memo1.Lines do
+    begin
+      Add(inttostr(Coordinates.id_burial));
+      Add(inttostr(Coordinates.latitude));
+      Add(inttostr(Coordinates.longitude));
+    end;
+  end;
 end;
 
 end.

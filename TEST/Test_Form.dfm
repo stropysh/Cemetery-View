@@ -38,4 +38,13 @@ object Form1: TForm1
     Height = 297
     TabOrder = 2
   end
+  object Button3: TButton
+    Left = 8
+    Top = 96
+    Width = 201
+    Height = 33
+    Caption = #1063#1090#1077#1085#1080#1077' '#1080#1079' '#1041#1044' '#1082#1086#1086#1088#1076#1080#1085#1072#1090
+    TabOrder = 3
+    OnClick = Button3Click
+  end
 end
