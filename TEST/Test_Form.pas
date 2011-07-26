@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, DB_Universal_IB, DB_Test, Operation_DB;
+  Dialogs, StdCtrls, ExtCtrls;
 
 type
   TForm1 = class(TForm)
@@ -12,9 +12,15 @@ type
     Button2: TButton;
     Memo1: TMemo;
     Button3: TButton;
+    Button4: TButton;
+    PaintBox1: TPaintBox;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,12 +34,21 @@ var
 
 implementation
 
+uses
+  DB_Universal_IB, DB_Test, Operation_DB, Figure;
+
 {$R *.dfm}
 
 //Тест1
 procedure test1;
 begin
   showmessage('Пашет!');
+end;
+//Создание классов
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  Figures:=TFigure.Create(PaintBox1.Canvas);
+  Burial:=TBurial.Create(PaintBox1.Canvas);
 end;
 
 //Коннект
@@ -82,6 +97,7 @@ begin
   //Запись в структуру
   Read_Coordinates_Text(DataModule1.Query, DataModule1.Transact ,'1');
   Memo1.Clear;
+  New(Coordinates);
   for i:=0 to High(FCoordinates) do
   begin
     Coordinates^:=FCoordinates[i];
@@ -92,6 +108,13 @@ begin
       Add(inttostr(Coordinates.longitude));
     end;
   end;
+  Dispose(Coordinates);
+end;
+
+//Нарисовать себя
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+  Burial.Paint_Self;
 end;
 
 end.

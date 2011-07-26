@@ -5,7 +5,8 @@ uses
   Test_Form in 'Test_Form.pas' {Form1},
   DB_Test in 'DB_Test.pas' {DataModule1: TDataModule},
   DB_Universal_IB in '..\UDB Universal\DB_Universal_IB.pas',
-  Operation_DB in '..\UOperation DB\Operation_DB.pas';
+  Operation_DB in '..\UOperation DB\Operation_DB.pas',
+  Figure in '..\TFigure\Figure.pas';
 
 {$R *.res}
 
