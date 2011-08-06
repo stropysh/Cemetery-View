@@ -86,8 +86,8 @@ object Form1: TForm1
     TabOrder = 4
     OnCanResize = ScrollBox1CanResize
     object PaintBox1: TPaintBox
-      Left = 0
-      Top = 0
+      Left = 3
+      Top = 3
       Width = 500
       Height = 500
       OnMouseDown = PaintBox1MouseDown
@@ -113,5 +113,18 @@ object Form1: TForm1
     BevelKind = bkSoft
     ScrollBars = ssVertical
     TabOrder = 6
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 468
+    Width = 960
+    Height = 19
+    Panels = <
+      item
+        Width = 50
+      end
+      item
+        Width = 50
+      end>
   end
 end

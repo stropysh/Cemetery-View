@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls;
+  Dialogs, StdCtrls, ExtCtrls, ComCtrls;
 
 type
   TForm1 = class(TForm)
@@ -18,6 +18,7 @@ type
     PaintBox1: TPaintBox;
     Edit1: TEdit;
     Memo1: TMemo;
+    StatusBar1: TStatusBar;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -73,6 +74,8 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   Figures:=TFigure.Create(PaintBox1.Canvas);
   Burial:=TBurial.Create(PaintBox1.Canvas);
+  PaintBox1.Width:=Figure.VISUAL_X;
+  PaintBox1.Height:=Figure.VISUAL_Y;
 end;
 
 //Коннект
@@ -114,7 +117,7 @@ var
   i: integer;
 begin
   //Запись в структуру
-  Read_Coordinates(DataModule1.Query, DataModule1.Transact ,'2');
+  Read_Coordinates(DataModule1.Query, DataModule1.Transact ,'34');
   Memo1.Clear;
   New(Coordinates);
   for i:=0 to High(FCoordinates) do
@@ -158,6 +161,8 @@ procedure TForm1.PaintBox1MouseMove(Sender: TObject; Shift: TShiftState; X,
 begin
   if FMovement = true then  //Проверяем зажата ли клавиша
     burial.Paint_Move(X,Y);
+  StatusBar1.Panels.Items[0].Text:='X: '+IntToStr(X);
+  StatusBar1.Panels.Items[1].Text:='Y: '+IntToStr(Y);
 end;
 
 //Оканчание перемещения
